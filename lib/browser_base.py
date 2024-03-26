@@ -3,7 +3,7 @@
 import os
 
 
-def run_browser(name, container, user):
+def run(name, container, user):
     print(f'Starting {name}')
     os.system(f'''
         docker run -e DISPLAY=$DISPLAY \\
