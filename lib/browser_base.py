@@ -3,6 +3,17 @@
 import os
 
 
+def prompt_user(user_list):
+    print('\nAvailable users:')
+    while True:
+        for i, user in enumerate(user_list):
+            print(f'[{i}] {user}')
+
+        selection = input('> ')
+        if selection.isdigit() and int(selection) < len(user_list):
+            return user_list[int(selection)]
+
+
 def run(name, container, user):
     print(f'Starting {name}')
     os.system(f'''

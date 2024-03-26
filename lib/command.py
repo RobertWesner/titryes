@@ -5,13 +5,16 @@ import psutil
 import sys
 
 from lib import base
-from browsers import firefox
+from browser import firefox
+from browser import chrome
 
 firefox_users = []
+chrome_users = []
 
 
 def copy_ntfs_profiles(profile_dir):
     global firefox_users
+    global chrome_users
 
     partitions = [partition for partition in psutil.disk_partitions() if partition.fstype.startswith('ntfs')]
     if len(partitions) == 0:
@@ -51,8 +54,13 @@ def copy_ntfs_profiles(profile_dir):
         for user in users:
             print(f'        - {user}')
 
+            # Firefox, Firefox Developer Edition, Firefox Nightly
             firefox_users = firefox.copy_windows_user(partition, user, profile_dir, firefox_users)
 
+            # Chrome
+            chrome_users = chrome.copy_windows_user(partition, user, profile_dir, chrome_users)
+
+            # Edge
             if os.path.isdir(
                     os.path.join(partition.mountpoint, 'Users', user, 'AppData/Local/Microsoft/Edge/User Data')):
                 pass
@@ -77,11 +85,15 @@ def run():
 
     print('\nAvailable browsers:')
     print(f'   [0] Firefox: {len(firefox_users)}')
+    print(f'   [1] Chrome: {len(chrome_users)}')
     print(f'   [e] exit')
     while True:
         match input('> '):
             case '0':
                 firefox.run(firefox_users)
+                break
+            case '1':
+                chrome.run(chrome_users)
                 break
             case 'e':
                 print('Goodbye')

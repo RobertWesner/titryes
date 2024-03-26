@@ -1,3 +1,5 @@
+# Copyright (C) 2024 Robert Wesner
+
 FROM alpine:3.19 AS base
 
 # TODO: is xf86-input-libinput necessary?
