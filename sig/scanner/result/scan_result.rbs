@@ -1,0 +1,11 @@
+class ScanResult
+  attr_reader browser: string
+  attr_reader os: string
+
+  @browser: string
+  @os: string
+  @path: string
+
+  def copy: (to: string) -> void
+  def run: (at: string) -> void
+end

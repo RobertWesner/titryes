@@ -30,8 +30,8 @@ Currently under development.
     <tbody>
         <tr>
             <td><img src="svg/browser/firefox.svg" width="60"></td>
-            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
@@ -44,7 +44,7 @@ Currently under development.
         </tr>
         <tr>
             <td><img src="svg/browser/chrome.svg" width="60"></td>
-            <td><img src="svg/supported.svg" width="60"></td>
+            <td><img src="svg/not-implemented.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>

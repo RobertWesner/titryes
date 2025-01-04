@@ -1,0 +1,2 @@
+class WindowsFirefoxResult < FirefoxResult
+end

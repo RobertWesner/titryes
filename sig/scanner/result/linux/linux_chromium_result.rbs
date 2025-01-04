@@ -1,0 +1,2 @@
+class LinuxChromiumResult < ChromiumResult
+end

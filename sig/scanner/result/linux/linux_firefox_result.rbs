@@ -1,0 +1,2 @@
+class LinuxFirefoxResult < FirefoxResult
+end

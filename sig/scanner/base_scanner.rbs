@@ -1,0 +1,4 @@
+class BaseScanner
+  def applies?: (file_system: String) -> bool
+  def scan: (path: String) -> Array[ScanResult]
+end

@@ -6,7 +6,7 @@ FROM titryes/base
 RUN apk add chromium
 
 ARG user
-ENV USERNAME ${user}
+ENV USERNAME=${user}
 ENV CHROME_CONFIG_HOME /home/${user}/.google-chrome
 USER ${user}
 
