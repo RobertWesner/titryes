@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Base-class for execution of browser containers
 class BaseRunner
   def self.start_container(container, path)
     system(%(

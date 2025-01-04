@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative "base_runner"
 
+# Executes the Firefox profile manager in a container
 class FirefoxRunner < BaseRunner
   @built = false
 

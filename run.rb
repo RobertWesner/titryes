@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require "tmpdir"
 
 require_relative "src/scanner/windows_scanner"
 require_relative "src/scanner/linux_scanner"
 
 puts(
-  <<~'EOS'
-     _____ _ _                        
-    |_   _(_) |_ _ __ _   _  ___  ___ 
+  <<~'TITLE'
+     _____ _ _
+    |_   _(_) |_ _ __ _   _  ___  ___
       | | | | __| '__| | | |/ _ \/ __|
       | | | | |_| |  | |_| |  __/\__ \
       |_| |_|\__|_|   \__, |\___||___/
                       |___/
 
-  EOS
+  TITLE
 )
 
 # TODO: check for docker being installed
@@ -36,13 +38,13 @@ scanners = [
 puts("Scanning mounted partitions.")
 partitions = `df -h --output=fstype,target | tail -n +2 | tr -s ' '`
              .split("\n")
-             .map { |line| line.split(" ") }
+             .map(&:split)
              .map { |part| { type: part[0].downcase, path: part[1] } }
-             .select { |item| item[:type] != "tmpfs" }
+             .reject { |item| item[:type] == "tmpfs" }
 
 scan_results = []
 partitions.each do |partition|
-  puts("Found partition of type \"" + partition[:type] + "\" on path \"" + partition[:path] + "\"...")
+  puts("Found partition of type \"#{partition[:type]}\" on path \"#{partition[:path]}\"...")
 
   scanners.each do |scanner|
     next unless scanner.applies?(partition[:type])
@@ -57,11 +59,11 @@ puts("\nFound the following browsers:")
 results_text = "\n"
 # @type result [ScanResult]
 scan_results.each_with_index do |result, i|
-  results_text += (i + 1).to_s + ") " + result.browser + " on " + result.os + "\n"
+  results_text += "#{i + 1}) #{result.browser} on #{result.os}\n"
 end
 results_text += "e) Exit\n\n> "
 
-while true
+loop do
   print(results_text)
   input = (gets || "").strip.downcase
 

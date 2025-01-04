@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Result of a successful scan.
+# Contains information about found browser, operating system, and path
 class ScanResult
   attr_reader :browser, :os
 

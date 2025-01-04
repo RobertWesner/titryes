@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require_relative "scan_result"
 require_relative "../../runner/firefox_runner"
 
+# Found Firefox
 class FirefoxResult < ScanResult
   def copy(to)
     to += "/.mozilla/firefox"

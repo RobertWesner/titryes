@@ -1,28 +1,21 @@
+# frozen_string_literal: true
+
 require_relative "base_scanner"
 require_relative "result/firefox_result"
 require_relative "result/chrome_result"
 
+# Scanner for GNU/Linux
 class LinuxScanner < BaseScanner
   def applies?(file_system)
     %w[ext ext2 ext3 ext4 btrfs xfs zfs].include?(file_system)
   end
 
   def scan(path)
-    return [] unless Dir.exist?(path + "home")
+    return [] unless Dir.exist?("#{path}home")
 
-    result = []
     # Firefox (+ Dev and Nightly as profiles)
-    Dir[path + "home/*/.mozilla/firefox"].each do |p|
-      result.push(FirefoxResult.new("Firefox", "Linux", p))
-    end
-
+    result = Dir["#{path}home/*/.mozilla/firefox"].map { |p| FirefoxResult.new("Firefox", "Linux", p) }
     # Chromium
-    Dir[path + "home/*/.config/chromium"].each do |p|
-      result.push(ChromeResult.new("Chrome", "Linux", p))
-    end
-
-    # TODO: chrome and stuff
-
-    result
+    result + Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chrome", "Linux", p) }
   end
 end

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative "base_runner"
 
+# Executes a Chromium instance in a container
 class ChromeRunner < BaseRunner
   @built = false
 
