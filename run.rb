@@ -1,17 +1,18 @@
-require 'tmpdir'
+require "tmpdir"
 
 require_relative "src/scanner/windows_scanner"
 require_relative "src/scanner/linux_scanner"
 
-puts(<<'EOS'
- _____ _ _                        
-|_   _(_) |_ _ __ _   _  ___  ___ 
-  | | | | __| '__| | | |/ _ \/ __|
-  | | | | |_| |  | |_| |  __/\__ \
-  |_| |_|\__|_|   \__, |\___||___/
-                  |___/           
+puts(
+  <<~'EOS'
+     _____ _ _                        
+    |_   _(_) |_ _ __ _   _  ___  ___ 
+      | | | | __| '__| | | |/ _ \/ __|
+      | | | | |_| |  | |_| |  __/\__ \
+      |_| |_|\__|_|   \__, |\___||___/
+                      |___/
 
-EOS
+  EOS
 )
 
 # TODO: check for docker being installed
@@ -20,33 +21,31 @@ EOS
 puts("/!\\ Make sure to have mounted all partitions you intend to scan.\n\n")
 
 puts("Running setup...")
-system("""
+system("
     docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \\
         -t titryes/base \\
         docker >/dev/null 2>&12
-""")
+")
 system("xauth nlist $DISPLAY | sed -e \"s/^..../ffff/\" | xauth -f /tmp/.docker.xauth nmerge - > /dev/null 2>&1")
 
 scanners = [
   WindowsScanner.new,
-  LinuxScanner.new,
+  LinuxScanner.new
 ]
 
 puts("Scanning mounted partitions.")
 partitions = `df -h --output=fstype,target | tail -n +2 | tr -s ' '`
-  .split("\n")
-  .map { |line| line.split(" ") }
-  .map { |part| {type: part[0].downcase, path: part[1]} }
-  .select { |item| item[:type] != "tmpfs" }
+             .split("\n")
+             .map { |line| line.split(" ") }
+             .map { |part| { type: part[0].downcase, path: part[1] } }
+             .select { |item| item[:type] != "tmpfs" }
 
 scan_results = []
 partitions.each do |partition|
   puts("Found partition of type \"" + partition[:type] + "\" on path \"" + partition[:path] + "\"...")
 
   scanners.each do |scanner|
-    unless scanner.applies?(partition[:type])
-      next
-    end
+    next unless scanner.applies?(partition[:type])
 
     puts("Scanning...")
     scan_results.push(*scanner.scan(partition[:path]))
@@ -66,15 +65,11 @@ while true
   print(results_text)
   input = (gets || "").strip.downcase
 
-  if input == "e"
-    break
-  end
+  break if input == "e"
 
   # @type result [ScanResult]
   result = scan_results[input.to_i - 1] || nil
-  if result == nil
-    next
-  end
+  next if result.nil?
 
   Dir.mktmpdir do |d|
     result.run(d)

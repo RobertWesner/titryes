@@ -10,6 +10,6 @@ class ChromeRunner < BaseRunner
       @built = true
     end
 
-    self.start_container("chrome", at)
+    start_container("chrome", at)
   end
 end

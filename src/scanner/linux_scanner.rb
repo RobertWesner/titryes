@@ -8,9 +8,7 @@ class LinuxScanner < BaseScanner
   end
 
   def scan(path)
-    unless Dir.exist?(path + "home")
-      return []
-    end
+    return [] unless Dir.exist?(path + "home")
 
     result = []
     # Firefox (+ Dev and Nightly as profiles)

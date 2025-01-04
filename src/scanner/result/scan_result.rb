@@ -7,9 +7,7 @@ class ScanResult
     @path = path
   end
 
-  def copy(to)
-  end
+  def copy(to); end
 
-  def run(at)
-  end
+  def run(at); end
 end

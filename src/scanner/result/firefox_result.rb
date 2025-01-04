@@ -3,7 +3,7 @@ require_relative "../../runner/firefox_runner"
 
 class FirefoxResult < ScanResult
   def copy(to)
-    to = to + "/.mozilla/firefox"
+    to += "/.mozilla/firefox"
     FileUtils.mkdir_p(to)
     FileUtils.copy_entry(@path, to)
   end

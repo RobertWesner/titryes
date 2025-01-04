@@ -1,8 +1,11 @@
 <div align="center">
-    <h1>Titryes</h1>
-    <p>
-        This Is The Reason You Encrypt Stuff
-    </p>
+<h1>Titryes</h1>
+
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+
+<p>
+    This Is The Reason You Encrypt Stuff
+</p>
 </div>
 
 ---

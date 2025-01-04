@@ -10,6 +10,6 @@ class FirefoxRunner < BaseRunner
       @built = true
     end
 
-    self.start_container("firefox", at)
+    start_container("firefox", at)
   end
 end
