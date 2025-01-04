@@ -1,6 +1,5 @@
 class BaseRunner
   def self.start_container(container, path)
-    puts(container + " " + path)
     system(%{
       docker run -e DISPLAY=$DISPLAY \\
         -v /tmp/.X11-unix:/tmp/.X11-unix \\

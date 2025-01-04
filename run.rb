@@ -55,14 +55,15 @@ end
 
 puts("\nFound the following browsers:")
 
+results_text = "\n"
 # @type result [ScanResult]
 scan_results.each_with_index do |result, i|
-  puts((i + 1).to_s + ") " + result.browser + " on " + result.os)
+  results_text += (i + 1).to_s + ") " + result.browser + " on " + result.os + "\n"
 end
-puts("e) Exit")
+results_text += "e) Exit\n\n> "
 
 while true
-  print("> ")
+  print(results_text)
   input = (gets || "").strip.downcase
 
   if input == "e"

@@ -1,5 +1,6 @@
 require_relative "base_scanner"
-require_relative "result/linux/linux_firefox_result"
+require_relative "result/firefox_result"
+require_relative "result/chrome_result"
 
 class LinuxScanner < BaseScanner
   def applies?(file_system)
@@ -14,7 +15,12 @@ class LinuxScanner < BaseScanner
     result = []
     # Firefox (+ Dev and Nightly as profiles)
     Dir[path + "home/*/.mozilla/firefox"].each do |p|
-      result.push(LinuxFirefoxResult.new("Firefox", "Linux", p))
+      result.push(FirefoxResult.new("Firefox", "Linux", p))
+    end
+
+    # Chromium
+    Dir[path + "home/*/.config/chromium"].each do |p|
+      result.push(ChromeResult.new("Chrome", "Linux", p))
     end
 
     # TODO: chrome and stuff

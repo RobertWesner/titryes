@@ -14,8 +14,6 @@ Does not modify browser data.
 
 Pronounced `Tie-tree-yes`.
 
-Currently under development.
-
 ## Supported Browsers
 
 <table>
@@ -41,6 +39,12 @@ Currently under development.
         <tr>
             <td><img src="svg/browser/firefox-nightly.svg" width="60"></td>
             <td colspan="3">Available as Firefox profile</td>
+        </tr>
+        <tr>
+            <td><img src="svg/browser/chromium.svg" width="60"></td>
+            <td><img src="svg/not-supported.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
+            <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
             <td><img src="svg/browser/chrome.svg" width="60"></td>
