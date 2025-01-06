@@ -23,11 +23,13 @@ puts(
 puts("/!\\ Make sure to have mounted all partitions you intend to scan.\n\n")
 
 puts("Running setup...")
-system("
-    docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \\
-        -t titryes/base \\
-        docker >/dev/null 2>&12
-")
+system(
+<<'SHELL'
+  docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
+      -t titryes/base \
+      docker > /dev/null 2>&1
+SHELL
+)
 system("xauth nlist $DISPLAY | sed -e \"s/^..../ffff/\" | xauth -f /tmp/.docker.xauth nmerge - > /dev/null 2>&1")
 
 scanners = [
@@ -49,7 +51,6 @@ partitions.each do |partition|
   scanners.each do |scanner|
     next unless scanner.applies?(partition[:type])
 
-    puts("Scanning...")
     scan_results.push(*scanner.scan(partition[:path]))
   end
 end

@@ -11,10 +11,12 @@ class LinuxScanner < BaseScanner
   end
 
   def scan(path)
-    return [] unless Dir.exist?("#{path}home")
+    return [] unless Dir.exist?("#{path}/home")
+
+    puts("Found Linux...")
 
     # Firefox (+ Dev and Nightly as profiles)
-    result = Dir["#{path}home/*/.mozilla/firefox"].map { |p| FirefoxResult.new("Firefox", "Linux", p) }
+    result = Dir["#{path}home/*/.mozilla/"].map { |p| FirefoxResult.new("Firefox", "Linux", p) }
     # Chromium
     result + Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chrome", "Linux", p) }
   end

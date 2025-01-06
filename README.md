@@ -15,6 +15,8 @@ Copies browser profiles off of Windows, Linux, and macOS and uses those inside l
 
 Does not modify browser data.
 
+There is currently no support for snap or flatpak installations.
+
 Pronounced `Tie-tree-yes`.
 
 ## Supported Browsers
@@ -31,7 +33,7 @@ Pronounced `Tie-tree-yes`.
     <tbody>
         <tr>
             <td><img src="svg/browser/firefox.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
@@ -51,7 +53,7 @@ Pronounced `Tie-tree-yes`.
         </tr>
         <tr>
             <td><img src="svg/browser/chrome.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
