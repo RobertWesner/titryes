@@ -5,7 +5,7 @@ FROM titryes/base
 RUN apk add firefox
 
 ARG user
-ENV USERNAME ${user}
+ENV USERNAME=${user}
 USER ${user}
 
-CMD ["firefox", "-P"]
+CMD ["firefox", "-P", "-allow-downgrade"]

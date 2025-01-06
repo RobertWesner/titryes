@@ -1,0 +1,2 @@
+class FirefoxResult < ScanResult
+end

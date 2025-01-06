@@ -1,8 +1,11 @@
 <div align="center">
-    <h1>Titryes</h1>
-    <p>
-        This Is The Reason You Encrypt Stuff
-    </p>
+<h1>Titryes</h1>
+
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+
+<p>
+    This Is The Reason You Encrypt Stuff
+</p>
 </div>
 
 ---
@@ -12,9 +15,9 @@ Copies browser profiles off of Windows, Linux, and macOS and uses those inside l
 
 Does not modify browser data.
 
-Pronounced `Tie-tree-yes`.
+There is currently no support for snap or flatpak installations.
 
-Currently under development.
+Pronounced `Tie-tree-yes`.
 
 ## Supported Browsers
 
@@ -31,7 +34,7 @@ Currently under development.
         <tr>
             <td><img src="svg/browser/firefox.svg" width="60"></td>
             <td><img src="svg/supported.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
@@ -41,6 +44,12 @@ Currently under development.
         <tr>
             <td><img src="svg/browser/firefox-nightly.svg" width="60"></td>
             <td colspan="3">Available as Firefox profile</td>
+        </tr>
+        <tr>
+            <td><img src="svg/browser/chromium.svg" width="60"></td>
+            <td><img src="svg/not-supported.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
+            <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
             <td><img src="svg/browser/chrome.svg" width="60"></td>

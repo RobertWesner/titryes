@@ -14,6 +14,8 @@ ARG user
 ARG uid
 ARG gid
 
+ENV USERNAME=${user}
+
 RUN addgroup --gid ${gid} $USERNAME \
     && adduser \
     --disabled-password \

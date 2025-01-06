@@ -1,0 +1,3 @@
+class ChromeRunner < BaseRunner
+  @built: bool
+end
