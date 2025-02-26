@@ -24,7 +24,7 @@ puts("/!\\ Make sure to have mounted all partitions you intend to scan.\n\n")
 
 puts("Running setup...")
 system(
-<<'SHELL'
+  <<'SHELL'
   docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
       -t titryes/base \
       docker > /dev/null 2>&1
@@ -39,10 +39,10 @@ scanners = [
 
 puts("Scanning mounted partitions.")
 partitions = `df -h --output=fstype,target | tail -n +2 | tr -s ' '`
-             .split("\n")
-             .map(&:split)
-             .map { |part| { type: part[0].downcase, path: part[1] } }
-             .reject { |item| item[:type] == "tmpfs" }
+  .split("\n")
+  .map(&:split)
+  .map { |part| { type: part[0].downcase, path: part[1] } }
+  .reject { |item| item[:type] == "tmpfs" }
 
 scan_results = []
 partitions.each do |partition|

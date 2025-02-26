@@ -18,6 +18,7 @@ class LinuxScanner < BaseScanner
     # Firefox (+ Dev and Nightly as profiles)
     result = Dir["#{path}home/*/.mozilla/"].map { |p| FirefoxResult.new("Firefox", "Linux", p) }
     # Chromium
-    result + Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chrome", "Linux", p) }
+    result += Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chromium", "Linux", p) }
+    result + Dir["#{path}home/*/.config/google-chrome"].map { |p| ChromeResult.new("Chrome", "Linux", p) }
   end
 end
