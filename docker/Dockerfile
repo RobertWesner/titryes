@@ -27,3 +27,19 @@ RUN addgroup --gid ${gid} $USERNAME \
     $USERNAME
 
 WORKDIR /home/${user}
+
+FROM ubuntu:25.04 AS base_ubuntu
+
+ARG user
+ARG uid
+ARG gid
+
+ENV USERNAME=${user}
+
+RUN groupadd -g ${gid} $USERNAME
+RUN userdel ubuntu && useradd $USERNAME -u ${uid} -g ${gid} -m -s /bin/bash
+
+RUN  apt-get update \
+    && apt-get install -y wget gnupg2 dirmngr ca-certificates software-properties-common apt-transport-https curl
+
+WORKDIR /home/${user}

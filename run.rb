@@ -18,18 +18,29 @@ puts(
 )
 
 # TODO: check for docker being installed
-# TODO: check for Xorg
 
 puts("/!\\ Make sure to have mounted all partitions you intend to scan.\n\n")
 
 puts("Running setup...")
+puts("Creating alpine base image...")
 system(
   <<'SHELL'
   docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
-      -t titryes/base \
-      docker > /dev/null 2>&1
+    --target base \
+    -t titryes/base \
+    docker > /dev/null 2>&1
 SHELL
 )
+puts("Creating ubuntu base image...")
+system(
+  <<'SHELL'
+  docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
+    --target base_ubuntu \
+    -t titryes/base-ubuntu \
+    docker > /dev/null # 2>&1
+SHELL
+)
+puts("Creating Xorg configuration...")
 system("xauth nlist $DISPLAY | sed -e \"s/^..../ffff/\" | xauth -f /tmp/.docker.xauth nmerge - > /dev/null 2>&1")
 
 scanners = [

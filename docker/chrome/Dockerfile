@@ -10,5 +10,4 @@ ENV USERNAME=${user}
 ENV CHROME_CONFIG_HOME /home/${user}/.google-chrome
 USER ${user}
 
-# TODO: enable sandbox
 CMD ["chromium", "--no-sandbox"]
