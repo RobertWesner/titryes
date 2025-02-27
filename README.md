@@ -71,14 +71,14 @@ Pronounced `Tie-tree-yes`.
         </tr>
         <tr>
             <td><img src="svg/browser/opera.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
             <td><img src="svg/browser/opera-gx.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/not-supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>

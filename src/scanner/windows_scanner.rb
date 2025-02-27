@@ -20,6 +20,8 @@ class WindowsScanner < BaseScanner
       Dir["#{path}/Users/*/AppData/Local/Google/Chrome/User Data"].map { |p| ChromeResult.new("Chrome", "Windows", p) },
       Dir["#{path}/Users/*/AppData/Local/Google/Chrome Beta/User Data"].map { |p| ChromeResult.new("Chrome Beta", "Windows", p) },
       Dir["#{path}/Users/*/AppData/Local/Google/Chrome SxS/User Data"].map { |p| ChromeResult.new("Chrome Canary", "Windows", p) },
+      # Opera
+      Dir["#{path}/Users/*/AppData/Roaming/Opera Software/Opera Stable"].map { |p| OperaResult.new("Opera", "Windows", p) }
     ].flatten
   end
 end

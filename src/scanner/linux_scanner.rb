@@ -3,6 +3,7 @@
 require_relative "base_scanner"
 require_relative "result/firefox_result"
 require_relative "result/chrome_result"
+require_relative "result/opera_result"
 
 # Scanner for GNU/Linux
 class LinuxScanner < BaseScanner
@@ -23,6 +24,8 @@ class LinuxScanner < BaseScanner
       Dir["#{path}home/*/.config/google-chrome"].map { |p| ChromeResult.new("Google Chrome", "Linux", p) },
       Dir["#{path}home/*/.config/google-chrome-beta"].map { |p| ChromeResult.new("Google Chrome Beta", "Linux", p) },
       Dir["#{path}home/*/.config/google-chrome-canary"].map { |p| ChromeResult.new("Google Chrome Canary", "Linux", p) },
+      # Opera
+      Dir["#{path}home/*/.config/opera"].map { |p| OperaResult.new("Opera", "Linux", p) }
     ].flatten
   end
 end
