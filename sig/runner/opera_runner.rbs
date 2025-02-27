@@ -1,0 +1,3 @@
+class OperaRunner < BaseRunner
+  @built: bool
+end

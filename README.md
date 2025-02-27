@@ -144,6 +144,6 @@ Pronounced `Tie-tree-yes`.
 ## Limitations
 
 - Sound is not available
-- Resizing the Window crashes it, it has to stay maximized
+- Shrinking the Window crashes on Chrome and its ilk
 
 Somehow this does run on wayland despite using an Xorg passthrough.
