@@ -5,7 +5,7 @@ require_relative "base_scanner"
 # Scanner for Windows
 class WindowsScanner < BaseScanner
   def applies?(file_system)
-    %w[ntfs fuseblk].include?(file_system)
+    %w[ntfs ntfs1 ntfs2 ntfs3 fuseblk].include?(file_system)
   end
 
   def scan(path)
@@ -13,10 +13,13 @@ class WindowsScanner < BaseScanner
 
     puts("Found Windows...")
 
-    # Firefox (+ Dev and Nightly as profiles)
-    result = Dir["#{path}/Users/*/AppData/Roaming/Mozilla"].map { |p| FirefoxResult.new("Firefox", "Windows", p) }
-    # Chrome
-    # TODO: check if this includes extensions
-    result + Dir["#{path}/Users/*/AppData/Local/Google/Chrome/User Data"].map { |p| ChromeResult.new("Chrome", "Windows", p) }
+    [
+      # Firefox (+ Dev and Nightly as profiles)
+      Dir["#{path}/Users/*/AppData/Roaming/Mozilla"].map { |p| FirefoxResult.new("Firefox", "Windows", p) },
+      # Chrome
+      Dir["#{path}/Users/*/AppData/Local/Google/Chrome/User Data"].map { |p| ChromeResult.new("Chrome", "Windows", p) },
+      Dir["#{path}/Users/*/AppData/Local/Google/Chrome Beta/User Data"].map { |p| ChromeResult.new("Chrome Beta", "Windows", p) },
+      Dir["#{path}/Users/*/AppData/Local/Google/Chrome SxS/User Data"].map { |p| ChromeResult.new("Chrome Canary", "Windows", p) },
+    ].flatten
   end
 end

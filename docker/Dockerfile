@@ -1,6 +1,6 @@
 # Copyright (C) 2024 Robert Wesner
 
-FROM alpine:3.19 AS base
+FROM alpine:3.21.3 AS base
 
 # TODO: is xf86-input-libinput necessary?
 RUN apk add xorg-server xf86-input-libinput

@@ -9,6 +9,7 @@ class BaseRunner
         -v /tmp/.docker.xauth:/tmp/.docker.xauth:rw \\
         -v #{path}:/home/$USER \\
         -e XAUTHORITY=/tmp/.docker.xauth \\
+        --shm-size=2gb \\
         -t titryes/#{container} > /dev/null 2>&1
     ))
   end

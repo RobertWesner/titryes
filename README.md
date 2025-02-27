@@ -54,19 +54,19 @@ Pronounced `Tie-tree-yes`.
         <tr>
             <td><img src="svg/browser/chrome.svg" width="60"></td>
             <td><img src="svg/supported.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
             <td><img src="svg/browser/chrome-beta.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
             <td><img src="svg/browser/chrome-canary.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
-            <td><img src="svg/not-implemented.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
+            <td><img src="svg/supported.svg" width="60"></td>
             <td><img src="svg/not-implemented.svg" width="60"></td>
         </tr>
         <tr>
@@ -144,4 +144,6 @@ Pronounced `Tie-tree-yes`.
 ## Limitations
 
 - Sound is not available
-- You need to use Xorg for the graphics passthrough
+- Resizing the Window crashes it, it has to stay maximized
+
+Somehow this does run on wayland despite using an Xorg passthrough.

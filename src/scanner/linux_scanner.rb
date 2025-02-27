@@ -15,9 +15,14 @@ class LinuxScanner < BaseScanner
 
     puts("Found Linux...")
 
-    # Firefox (+ Dev and Nightly as profiles)
-    result = Dir["#{path}home/*/.mozilla/"].map { |p| FirefoxResult.new("Firefox", "Linux", p) }
-    # Chromium
-    result + Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chrome", "Linux", p) }
+    [
+      # Firefox (+ Dev and Nightly as profiles)
+      Dir["#{path}home/*/.mozilla/"].map { |p| FirefoxResult.new("Firefox", "Linux", p) },
+      # Chromium
+      Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chromium", "Linux", p) },
+      Dir["#{path}home/*/.config/google-chrome"].map { |p| ChromeResult.new("Google Chrome", "Linux", p) },
+      Dir["#{path}home/*/.config/google-chrome-beta"].map { |p| ChromeResult.new("Google Chrome Beta", "Linux", p) },
+      Dir["#{path}home/*/.config/google-chrome-canary"].map { |p| ChromeResult.new("Google Chrome Canary", "Linux", p) },
+    ].flatten
   end
 end
