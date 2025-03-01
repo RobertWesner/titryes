@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# TODO: check for ruby, docker, and bundle being installed
+
+bundle exec ruby run.rb

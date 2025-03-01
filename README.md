@@ -19,6 +19,9 @@ There is currently no support for snap or flatpak installations.
 
 Pronounced `Tie-tree-yes`.
 
+[//]: # (TODO: proper demo screenshot)
+![](./readme/demo.png)
+
 ## Supported Browsers
 
 <table>

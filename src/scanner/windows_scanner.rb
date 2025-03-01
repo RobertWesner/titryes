@@ -15,13 +15,13 @@ class WindowsScanner < BaseScanner
 
     [
       # Firefox (+ Dev and Nightly as profiles)
-      Dir["#{path}/Users/*/AppData/Roaming/Mozilla"].map { |p| FirefoxResult.new("Firefox", "Windows", p) },
+      Dir["#{path}/Users/*/AppData/Roaming/Mozilla"].map { |p| FirefoxResult.new("firefox", "Windows", p) },
       # Chrome
-      Dir["#{path}/Users/*/AppData/Local/Google/Chrome/User Data"].map { |p| ChromeResult.new("Chrome", "Windows", p) },
-      Dir["#{path}/Users/*/AppData/Local/Google/Chrome Beta/User Data"].map { |p| ChromeResult.new("Chrome Beta", "Windows", p) },
-      Dir["#{path}/Users/*/AppData/Local/Google/Chrome SxS/User Data"].map { |p| ChromeResult.new("Chrome Canary", "Windows", p) },
+      Dir["#{path}/Users/*/AppData/Local/Google/Chrome/User Data"].map { |p| ChromeResult.new("chrome", "Windows", p) },
+      Dir["#{path}/Users/*/AppData/Local/Google/Chrome Beta/User Data"].map { |p| ChromeResult.new("chrome-beta", "Windows", p) },
+      Dir["#{path}/Users/*/AppData/Local/Google/Chrome SxS/User Data"].map { |p| ChromeResult.new("chrome-canary", "Windows", p) },
       # Opera
-      Dir["#{path}/Users/*/AppData/Roaming/Opera Software/Opera Stable"].map { |p| OperaResult.new("Opera", "Windows", p) }
+      Dir["#{path}/Users/*/AppData/Roaming/Opera Software/Opera Stable"].map { |p| OperaResult.new("opera", "Windows", p) }
     ].flatten
   end
 end
