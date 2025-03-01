@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
+# Runs through all mounted partitions providing ScanResults.
 class PartitionProcessor
   def initialize(scanners)
     @scanners = scanners
   end
 
+  def partitions
+    `df -h --output=fstype,target | tail -n +2 | tr -s ' '`
+      .split("\n")
+      .map(&:split)
+      .map { |part| { type: part[0].downcase, path: part[1] } }
+      .reject { |item| item[:type] == "tmpfs" }
+  end
+
   def process
     puts("Scanning mounted partitions.")
-    partitions = `df -h --output=fstype,target | tail -n +2 | tr -s ' '`
-     .split("\n")
-     .map(&:split)
-     .map { |part| { type: part[0].downcase, path: part[1] } }
-     .reject { |item| item[:type] == "tmpfs" }
 
     scan_results = []
     partitions.each do |partition|

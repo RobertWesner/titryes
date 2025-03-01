@@ -10,7 +10,7 @@
 
 ---
 
-A Linux command-line utility running Dockerized browser instances from other operating systems.
+A Linux utility running Dockerized browser instances from other operating systems.
 Copies browser profiles off of Windows, Linux, and macOS and uses those inside local browsers.
 
 Does not modify browser data.

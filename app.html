@@ -60,7 +60,6 @@
 
             body {
                 margin: 0;
-                padding: 2rem;
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
@@ -68,25 +67,32 @@
                 font-family: sans-serif;
                 background-color: #f8f8f8;
                 color: #161617;
+                user-select: none;
             }
 
             #out {
                 flex-grow: 1;
                 overflow: scroll;
+                padding: 2rem;
             }
 
-            #out > div {
-                position: static;
+            #scan-btn-container {
+                background-color: #eaeae6;
+                text-align: center;
+                padding: 0.6rem;
             }
 
             #scan-btn {
                 padding: 0.4rem;
                 background-color: #2293f5;
                 border: none;
-                border-radius: 0.6rem;
+                border-radius: 0.4rem;
                 color: white;
-                margin: auto;
                 font-size: 2rem;
+            }
+
+            #scan-btn:hover {
+                background-color: #52aeff;
             }
 
             .result {
@@ -98,13 +104,24 @@
 
             .result:hover {
                 filter: brightness(150%);
+                color: #4242ff;
             }
 
             body[launching] > * {
                 display: none;
             }
 
+            body[launching] {
+                background-color: #f1f1f1;
+                color: #464646;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
             body[launching]:after {
+                font-size: 3rem;
                 content: 'Launching browser...'
             }
         </style>
@@ -122,6 +139,8 @@
                 </li>
             </ol>
         </div>
-        <button id="scan-btn">Scan available browsers</button>
+        <div id="scan-btn-container">
+            <button id="scan-btn">Scan available browsers</button>
+        </div>
     </body>
 </html>

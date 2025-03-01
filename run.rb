@@ -11,7 +11,7 @@ require_relative "src/scanner/linux_scanner"
 Setup.run
 scan_results = []
 
-set :port, 48723
+set :port, 48_723
 
 get "/exit" do
   system("kill #{Process.pid}")
@@ -29,9 +29,9 @@ end
 get "/scan" do
   scan_results = PartitionProcessor.new([
     WindowsScanner.new,
-    LinuxScanner.new,
+    LinuxScanner.new
   ]).process
-  scan_results.map { |scan_result| { browser: scan_result.browser, os: scan_result.os }}.to_json
+  scan_results.map { |scan_result| { browser: scan_result.browser, os: scan_result.os } }.to_json
 end
 
 get "/run" do

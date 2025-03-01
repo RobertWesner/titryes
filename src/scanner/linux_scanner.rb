@@ -11,6 +11,7 @@ class LinuxScanner < BaseScanner
     %w[ext ext2 ext3 ext4 btrfs xfs zfs].include?(file_system)
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
   def scan(path)
     return [] unless Dir.exist?("#{path}/home")
 

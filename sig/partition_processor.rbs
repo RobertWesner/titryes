@@ -1,0 +1,7 @@
+class PartitionProcessor
+  @scanners: Array[BaseScanner]
+
+  def partitions: -> Array[String]
+
+  def process: -> void
+end

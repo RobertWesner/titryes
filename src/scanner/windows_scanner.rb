@@ -8,6 +8,7 @@ class WindowsScanner < BaseScanner
     %w[ntfs ntfs1 ntfs2 ntfs3 fuseblk].include?(file_system)
   end
 
+  # rubocop:disable Metrics/AbcSize
   def scan(path)
     return [] unless Dir.exist?("#{path}/Users")
 

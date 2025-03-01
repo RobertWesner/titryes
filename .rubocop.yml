@@ -9,3 +9,6 @@ Style/StringLiterals:
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
