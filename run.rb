@@ -40,8 +40,7 @@ get "/run" do
   end
 end
 
-system("docker remove titryes-desktop")
-system("docker build --build-arg user=$USER -t titryes/desktop docker/desktop #> /dev/null 2>&1")
+system("docker kill titryes-desktop ; docker remove titryes-desktop")
 system(%(
   docker run -d -e DISPLAY=$DISPLAY \\
     -v /tmp/.X11-unix:/tmp/.X11-unix \\
@@ -50,5 +49,5 @@ system(%(
     --shm-size=2gb \\
     --network host \\
     --name titryes-desktop \\
-    -t titryes/desktop #> /dev/null 2>&1
+    -t titryes/desktop > /dev/null 2>&1
 ))

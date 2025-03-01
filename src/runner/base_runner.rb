@@ -14,5 +14,7 @@ class BaseRunner
     ))
   end
 
+  def self.build; end
+
   def self.run(at); end
 end

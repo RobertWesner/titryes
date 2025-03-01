@@ -2,4 +2,11 @@
 
 # TODO: check for ruby, docker, and bundle being installed
 
+bundle install > /dev/null 2>&1
+if [ "$1" = "--build" ]; then
+  bundle exec ruby build.rb
+
+  exit
+fi
+
 bundle exec ruby run.rb

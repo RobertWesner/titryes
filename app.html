@@ -20,7 +20,13 @@
                                 ([id, { browser, os }]) => {
                                     const element = document.createElement('div');
                                     element.className = 'result';
-                                    element.addEventListener('click', () => fetch(`/run?id=${id}`));
+                                    element.addEventListener('click', () => {
+                                        document.body.setAttribute('launching', '');
+                                        const endLaunch = () => document.body.removeAttribute('launching');
+
+                                        fetch(`/run?id=${id}`).then(endLaunch);
+                                        setTimeout(endLaunch, 5000);
+                                    });
 
                                     const img = document.createElement('img');
                                     img.width = 64
@@ -93,10 +99,29 @@
             .result:hover {
                 filter: brightness(150%);
             }
+
+            body[launching] > * {
+                display: none;
+            }
+
+            body[launching]:after {
+                content: 'Launching browser...'
+            }
         </style>
     </head>
     <body>
-        <div id="out"></div>
-        <button id="scan-btn">Scan available Browsers</button>
+        <div id="out">
+            <ol>
+                <li>Make sure to mount all partitions you intend to scan before scanning.</li>
+                <li>Press "Scan available browsers".</li>
+                <li>
+                    Click the browser you wish to launch.
+                    <ul>
+                        <li>If you did not pre-build, this may take a while.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <button id="scan-btn">Scan available browsers</button>
     </body>
 </html>

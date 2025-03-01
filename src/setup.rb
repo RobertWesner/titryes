@@ -4,6 +4,7 @@ class Setup
   def self.run
     puts("Running setup...")
     build_base_image
+    build_desktop_image
     create_xorg_configuration
   end
 
@@ -23,9 +24,14 @@ class Setup
         docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
           --target base_ubuntu \
           -t titryes/base-ubuntu \
-          docker > /dev/null # 2>&1
+          docker > /dev/null 2>&1
       SHELL
     )
+  end
+
+  def self.build_desktop_image
+    puts("Creating desktop image...")
+    system("docker build --build-arg user=$USER -t titryes/desktop docker/desktop > /dev/null 2>&1")
   end
 
   def self.create_xorg_configuration

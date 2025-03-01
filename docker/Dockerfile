@@ -36,8 +36,9 @@ ARG gid
 
 ENV USERNAME=${user}
 
+RUN userdel ubuntu ; groupdel ubuntu || true
 RUN groupadd -g ${gid} $USERNAME
-RUN userdel ubuntu && useradd $USERNAME -u ${uid} -g ${gid} -m -s /bin/bash
+RUN useradd $USERNAME -u ${uid} -g ${gid} -m -s /bin/bash
 
 RUN  apt-get update \
     && apt-get install -y wget gnupg2 dirmngr ca-certificates software-properties-common apt-transport-https curl

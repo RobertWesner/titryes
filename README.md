@@ -22,6 +22,17 @@ Pronounced `Tie-tree-yes`.
 [//]: # (TODO: proper demo screenshot)
 ![](./readme/demo.png)
 
+## Installing and running
+
+1) Make sure Ruby, Bundler, and Docker are installed.
+2) Clone the repository.
+3) make titryes executable: `chmod +x titryes`
+4) [optional] Pre-build containers: `./titryes --build`
+   - Pre-building containers speeds up execution and may be necessary on slower devices and on devices with a slow internet connection.
+   - This may take a while.
+5) Run `./titryes`.
+   - Titryes opens a containerized Firefox instance as GUI.
+
 ## Supported Browsers
 
 <table>

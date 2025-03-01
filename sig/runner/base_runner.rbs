@@ -1,4 +1,5 @@
 class BaseRunner
   def self.start_container: (container: String, path: String) -> void
+  def self.build: -> void
   def self.run: -> void
 end
