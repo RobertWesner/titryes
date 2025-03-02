@@ -1,0 +1,7 @@
+class Setup
+  def self.run: -> void
+  def self.build_alpine_image: -> void
+  def self.build_ubuntu_image: -> void
+  def self.build_desktop_image: -> void
+  def self.create_xorg_configuration: -> void
+end

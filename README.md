@@ -10,7 +10,7 @@
 
 ---
 
-A Linux command-line utility running Dockerized browser instances from other operating systems.
+A Linux utility running Dockerized browser instances from other operating systems.
 Copies browser profiles off of Windows, Linux, and macOS and uses those inside local browsers.
 
 Does not modify browser data.
@@ -18,6 +18,20 @@ Does not modify browser data.
 There is currently no support for snap or flatpak installations.
 
 Pronounced `Tie-tree-yes`.
+
+[//]: # (TODO: proper demo screenshot)
+![](./readme/demo.png)
+
+## Installing and running
+
+1) Make sure Ruby, Bundler, and Docker are installed.
+2) Clone the repository.
+3) make titryes executable: `chmod +x titryes`
+4) [optional] Pre-build containers: `./titryes --build`
+   - Pre-building containers speeds up execution and may be necessary on slower devices and on devices with a slow internet connection.
+   - This may take a while.
+5) Run `./titryes`.
+   - Titryes opens a containerized Firefox instance as GUI.
 
 ## Supported Browsers
 

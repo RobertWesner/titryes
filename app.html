@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <script>
+            window.addEventListener('beforeunload', () => {
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', '/exit', false);
+                xhr.send(null);
+            });
+
+            window.addEventListener('load', () => {
+                document.querySelector('#scan-btn').addEventListener('click', () => {
+                    fetch('/scan')
+                        .then(r => r.json())
+                        .then(json => {
+                            const output = document.querySelector('#out');
+                            output.textContent = '';
+
+                            json.entries().forEach(
+                                ([id, { browser, os }]) => {
+                                    const element = document.createElement('div');
+                                    element.className = 'result';
+                                    element.addEventListener('click', () => {
+                                        document.body.setAttribute('launching', '');
+                                        const endLaunch = () => document.body.removeAttribute('launching');
+
+                                        fetch(`/run?id=${id}`).then(endLaunch);
+                                        setTimeout(endLaunch, 5000);
+                                    });
+
+                                    const img = document.createElement('img');
+                                    img.width = 64
+                                    img.src = `/svg?name=browser/${browser}.svg`
+                                    element.append(img);
+
+                                    const info = document.createElement('div');
+                                    element.append(info);
+
+                                    const browserElement = document.createElement('b');
+                                    browserElement.className = 'browser'
+                                    browserElement.textContent = browser;
+                                    info.append(browserElement);
+
+                                    const osElement = document.createElement('div');
+                                    osElement.className = 'os'
+                                    osElement.textContent = os;
+                                    info.append(osElement);
+
+                                    output.append(element);
+                                }
+                            )
+                        })
+                });
+            });
+        </script>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                max-height: 100vh;
+                font-family: sans-serif;
+                background-color: #f8f8f8;
+                color: #161617;
+                user-select: none;
+            }
+
+            #out {
+                flex-grow: 1;
+                overflow: scroll;
+                padding: 2rem;
+            }
+
+            #scan-btn-container {
+                background-color: #eaeae6;
+                text-align: center;
+                padding: 0.6rem;
+            }
+
+            #scan-btn {
+                padding: 0.4rem;
+                background-color: #2293f5;
+                border: none;
+                border-radius: 0.4rem;
+                color: white;
+                font-size: 2rem;
+            }
+
+            #scan-btn:hover {
+                background-color: #52aeff;
+            }
+
+            .result {
+                display: inline-block;
+                text-align: center;
+                margin: 0.4rem;
+                cursor: pointer;
+            }
+
+            .result:hover {
+                filter: brightness(150%);
+                color: #4242ff;
+            }
+
+            body[launching] > * {
+                display: none;
+            }
+
+            body[launching] {
+                background-color: #f1f1f1;
+                color: #464646;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
+            body[launching]:after {
+                font-size: 3rem;
+                content: 'Launching browser...'
+            }
+        </style>
+    </head>
+    <body>
+        <div id="out">
+            <ol>
+                <li>Make sure to mount all partitions you intend to scan before scanning.</li>
+                <li>Press "Scan available browsers".</li>
+                <li>
+                    Click the browser you wish to launch.
+                    <ul>
+                        <li>If you did not pre-build, this may take a while.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div id="scan-btn-container">
+            <button id="scan-btn">Scan available browsers</button>
+        </div>
+    </body>
+</html>

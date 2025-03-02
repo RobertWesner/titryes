@@ -11,6 +11,7 @@ class LinuxScanner < BaseScanner
     %w[ext ext2 ext3 ext4 btrfs xfs zfs].include?(file_system)
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
   def scan(path)
     return [] unless Dir.exist?("#{path}/home")
 
@@ -18,14 +19,14 @@ class LinuxScanner < BaseScanner
 
     [
       # Firefox (+ Dev and Nightly as profiles)
-      Dir["#{path}home/*/.mozilla/"].map { |p| FirefoxResult.new("Firefox", "Linux", p) },
+      Dir["#{path}home/*/.mozilla/"].map { |p| FirefoxResult.new("firefox", "Linux", p) },
       # Chromium
-      Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("Chromium", "Linux", p) },
-      Dir["#{path}home/*/.config/google-chrome"].map { |p| ChromeResult.new("Google Chrome", "Linux", p) },
-      Dir["#{path}home/*/.config/google-chrome-beta"].map { |p| ChromeResult.new("Google Chrome Beta", "Linux", p) },
-      Dir["#{path}home/*/.config/google-chrome-canary"].map { |p| ChromeResult.new("Google Chrome Canary", "Linux", p) },
+      Dir["#{path}home/*/.config/chromium"].map { |p| ChromeResult.new("chromium", "Linux", p) },
+      Dir["#{path}home/*/.config/google-chrome"].map { |p| ChromeResult.new("chrome", "Linux", p) },
+      Dir["#{path}home/*/.config/google-chrome-beta"].map { |p| ChromeResult.new("chrome-beta", "Linux", p) },
+      Dir["#{path}home/*/.config/google-chrome-canary"].map { |p| ChromeResult.new("chrome-canary", "Linux", p) },
       # Opera
-      Dir["#{path}home/*/.config/opera"].map { |p| OperaResult.new("Opera", "Linux", p) }
+      Dir["#{path}home/*/.config/opera"].map { |p| OperaResult.new("opera", "Linux", p) }
     ].flatten
   end
 end

@@ -1,91 +1,53 @@
 # frozen_string_literal: true
 
 require "tmpdir"
+require "sinatra"
 
+require_relative "src/setup"
+require_relative "src/partition_processor"
 require_relative "src/scanner/windows_scanner"
 require_relative "src/scanner/linux_scanner"
 
-puts(
-  <<~'TITLE'
-     _____ _ _
-    |_   _(_) |_ _ __ _   _  ___  ___
-      | | | | __| '__| | | |/ _ \/ __|
-      | | | | |_| |  | |_| |  __/\__ \
-      |_| |_|\__|_|   \__, |\___||___/
-                      |___/
-
-  TITLE
-)
-
-# TODO: check for docker being installed
-
-puts("/!\\ Make sure to have mounted all partitions you intend to scan.\n\n")
-
-puts("Running setup...")
-puts("Creating alpine base image...")
-system(
-  <<'SHELL'
-  docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
-    --target base \
-    -t titryes/base \
-    docker > /dev/null 2>&1
-SHELL
-)
-puts("Creating ubuntu base image...")
-system(
-  <<'SHELL'
-  docker build --build-arg user=$USER --build-arg uid=$(id -u) --build-arg gid=$(id -g) \
-    --target base_ubuntu \
-    -t titryes/base-ubuntu \
-    docker > /dev/null # 2>&1
-SHELL
-)
-puts("Creating Xorg configuration...")
-system("xauth nlist $DISPLAY | sed -e \"s/^..../ffff/\" | xauth -f /tmp/.docker.xauth nmerge - > /dev/null 2>&1")
-
-scanners = [
-  WindowsScanner.new,
-  LinuxScanner.new
-]
-
-puts("Scanning mounted partitions.")
-partitions = `df -h --output=fstype,target | tail -n +2 | tr -s ' '`
-  .split("\n")
-  .map(&:split)
-  .map { |part| { type: part[0].downcase, path: part[1] } }
-  .reject { |item| item[:type] == "tmpfs" }
-
+Setup.run
 scan_results = []
-partitions.each do |partition|
-  puts("Found partition of type \"#{partition[:type]}\" on path \"#{partition[:path]}\"...")
 
-  scanners.each do |scanner|
-    next unless scanner.applies?(partition[:type])
+set :port, 48_723
 
-    scan_results.push(*scanner.scan(partition[:path]))
-  end
+get "/exit" do
+  system("kill #{Process.pid}")
+  system("docker kill titryes-desktop")
 end
 
-puts("\nFound the following browsers:")
-
-results_text = "\n"
-# @type result [ScanResult]
-scan_results.each_with_index do |result, i|
-  results_text += "#{i + 1}) #{result.browser} on #{result.os}\n"
+get "/svg" do
+  send_file("svg/#{params[:name]}")
 end
-results_text += "e) Exit\n\n> "
 
-loop do
-  print(results_text)
-  input = (gets || "").strip.downcase
+get "/" do
+  send_file("app.html")
+end
 
-  break if input == "e"
+get "/scan" do
+  scan_results = PartitionProcessor.new([
+    WindowsScanner.new,
+    LinuxScanner.new
+  ]).process
+  scan_results.map { |scan_result| { browser: scan_result.browser, os: scan_result.os } }.to_json
+end
 
-  # @type result [ScanResult]
-  result = scan_results[input.to_i - 1] || nil
-  next if result.nil?
-
+get "/run" do
   Dir.mktmpdir do |d|
-    result.run(d)
+    scan_results[Integer(params[:id])].run(d)
   end
 end
+
+system("docker kill titryes-desktop ; docker remove titryes-desktop")
+system(%(
+  docker run -d -e DISPLAY=$DISPLAY \\
+    -v /tmp/.X11-unix:/tmp/.X11-unix \\
+    -v /tmp/.docker.xauth:/tmp/.docker.xauth:rw \\
+    -e XAUTHORITY=/tmp/.docker.xauth \\
+    --shm-size=2gb \\
+    --network host \\
+    --name titryes-desktop \\
+    -t titryes/desktop > /dev/null 2>&1
+))

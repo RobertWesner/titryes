@@ -6,10 +6,14 @@ require_relative "base_runner"
 class FirefoxRunner < BaseRunner
   @built = false
 
+  def self.build
+    puts("Building Firefox...")
+    system("docker build --build-arg user=$USER -t titryes/firefox docker/firefox > /dev/null 2>&1")
+  end
+
   def self.run(at)
     unless @built
-      puts("Building container...")
-      system("docker build --build-arg user=$USER -t titryes/firefox docker/firefox > /dev/null 2>&1")
+      build
       @built = true
     end
 
