@@ -10,6 +10,21 @@
 
 ---
 
+> [!IMPORTANT]  
+> This repository is not getting regular updates. It was mostly a POC.
+> 
+> While it still seems to work, there has not been active development for over a year.
+>
+> The future will likely hold a rewrite in a compiled programming language, preferably Go,
+> so it is possible to run as a standalone program without requiring a package manager.
+> 
+> Planned features could include, but are not limited to:
+>  - Snap and Flatpak support, as that is how many new systems install Browsers these days
+>  - Integrated GUI, rather than a GUI container
+>  - Possibly streaming video and controls between host and container (VNC or similar) instead of Xorg passthrough
+>    - It would be much more convenient to have these views within the integrated GUI
+>  - Supporting alternatives to Docker (Podman should be barely any effort)
+
 A Linux utility running Dockerized browser instances from other operating systems.
 Copies browser profiles off of Windows, Linux, and macOS and uses those inside local browsers.
 
